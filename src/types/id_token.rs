@@ -1,5 +1,5 @@
 #[derive(Debug, PartialEq)]
-struct IdToken {
+pub struct IdToken {
     id_token: String,
 }
 
