@@ -166,6 +166,82 @@ pub enum ChargingRateUnitType {
     A,
 }
 
+/// Status returned in response to ClearCache.req.
+pub enum ClearCacheStatus {
+    /// Command has been executed.
+    Accepted,
+    /// Command has not been executed.
+    Rejected,
+}
+
+/// Status returned in response to ClearChargingProfile.req.
+pub enum ClearChargingProfileStatus {
+    /// Request has been accepted and will be executed.
+    Accepted,
+    /// No CHarging Profile(s) were found matching the request.
+    Unknown,
+}
+
+/// Status in ChangeConfiguration.conf.
+pub enum ConfigurationStatus {
+    /// Configuration key supported and setting has been changed.
+    Accepted,
+    /// Configuration key supported, but setting could not be changed.
+    Rejected,
+    /// Configuration key supported and setting has been changed,
+    /// bug change will be available after reboot (Charge Point
+    /// will not reboot itself).
+    RebootRequired,
+    /// Configuration key is not supported.
+    NotSupported,
+}
+
+/// Status in DataTransfer.conf.
+pub enum DataTransferStatus {
+    /// Message has been accepted and the contained request is accepted.
+    Accepted,
+    /// Message has been accepted but the contained request is rejected.
+    Rejected,
+    /// Message could not be interpreted due to unknown messageId string.
+    UnknownMessageId,
+    /// Message could not be interpreted due to unknown vendorId string.
+    UnknownVendorId,
+}
+
+/// Status in DiagnosticsStatusNotification.req.
+pub enum DiagnosticsStatus {
+    /// Charge Point is not performing diagnostics related tasks.
+    /// Status Idle SHALL only be used as in a DiagnosticsStatusNotification.req
+    /// that was triggered by a TriggerMessage.req.
+    Idle,
+    /// Diagnostics information has been uploaded.
+    Uploaded,
+    /// Uploading of diagnostics failed.
+    UploadFailed,
+    /// File is being uploaded.
+    Uploading,
+}
+
+/// Status of firmware download as reported in FirmwareStatusNotification.req.
+pub enum FirmwareStatus {
+    /// New firmware has been downloaded by Charge Point.
+    Downloaded,
+    /// Charge point failed to download firmware.
+    DownloadFailed,
+    /// Firmware is being downloaded.
+    Downloading,
+    /// Charge Point is not performing fimrware update related tasks.
+    /// Status Idle SHALL only be used as in a FirmwareStatusNotification.req
+    /// that was triggered by a TriggerMessage.req.
+    Idle,
+    /// Installation of new firmware has failed.
+    InstallationFailed,
+    /// Firmware is being installed.
+    Installing,
+    /// New firmware has successfully been installed in charge point.
+    Installed,
+}
+
 pub enum RecurrencyKindType {
     /// The schedule restarts at the beginning of the next day.
     Daily,
