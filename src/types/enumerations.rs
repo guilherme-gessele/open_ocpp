@@ -242,6 +242,14 @@ pub enum FirmwareStatus {
     Installed,
 }
 
+/// Status returned in response to GetCompositeSchedule.req.
+pub enum GetCompositeScheduleStatus {
+    /// Request has been accepted and will be executed.
+    Accepted,
+    /// Request has not been accepted and will not be executed.
+    Rejected,
+}
+
 pub enum RecurrencyKindType {
     /// The schedule restarts at the beginning of the next day.
     Daily,
