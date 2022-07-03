@@ -20,7 +20,7 @@ pub struct IdTagInfo {
     status: AuthorizationStatus,
 }
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug)]
 pub struct IdToken {
     id_token: String,
 }
@@ -32,6 +32,12 @@ impl IdToken {
         }
 
         IdToken { id_token }
+    }
+}
+
+impl PartialEq for IdToken {
+    fn eq(&self, other: &Self) -> bool {
+        self.id_token.to_lowercase() == other.id_token.to_lowercase()
     }
 }
 
@@ -59,5 +65,29 @@ mod tests {
     fn test_with_invalid_id_token() {
         let token = iter::repeat("a").take(21).collect();
         let _id_token = IdToken::new(token);
+    }
+
+    #[test]
+    fn test_id_token_partial_equals_with_same_token_case() {
+        let id_token_a = IdToken::new(String::from("abcd-01234"));
+        let id_token_b = IdToken::new(String::from("abcd-01234"));
+
+        assert_eq!(true, id_token_a == id_token_b)
+    }
+
+    #[test]
+    fn test_id_token_partial_equals_with_distinct_token_case() {
+        let id_token_a = IdToken::new(String::from("abcd-01234"));
+        let id_token_b = IdToken::new(String::from("ABCD-01234"));
+
+        assert_eq!(true, id_token_a == id_token_b)
+    }
+
+    #[test]
+    fn test_id_token_partial_equals_with_distict_tokens() {
+        let id_token_a = IdToken::new(String::from("abcd-01234"));
+        let id_token_b = IdToken::new(String::from("efgh-01234"));
+
+        assert_eq!(false, id_token_a == id_token_b)
     }
 }
