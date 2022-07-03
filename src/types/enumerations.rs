@@ -147,6 +147,25 @@ pub enum ChargingProfilePurposeType {
     TxProfile,
 }
 
+/// Status returned in response to SetChargingProfile.req.
+pub enum ChargingProfileStatus {
+    /// Request has been accepted and will be executed.
+    Accepted,
+    /// Request has not been accepted and will not be executed.
+    Rejected,
+    /// Charge Point indicates that the request is not supported.
+    NotSupported,
+}
+
+/// Unit in which a charging schedule is defined, as used in: GetCompositeSchedule.req and
+/// ChargingSchedule.
+pub enum ChargingRateUnitType {
+    /// Watts (power).
+    W,
+    /// Amperes (current).
+    A,
+}
+
 pub enum RecurrencyKindType {
     /// The schedule restarts at the beginning of the next day.
     Daily,
